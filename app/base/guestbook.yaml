@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: guestbook
+  namespace: argocd
+  labels:
+    test: joo
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/jwcheong0420/argocd-test'
+    path: guestbook
+    targetRevision: main
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: joo
+  syncPolicy:
+    automated: {}
