@@ -50,8 +50,12 @@ data:
                 "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Author}}",
                 "short": true
               },{
-                "title": "Message",
+                "title": "Commit Message",
                 "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}",
+                "short": true
+              },{
+                "title": "Operation Message",
+                "value": "{{.app.status.operationState.message}}",
                 "short": true
               }]
             }]
@@ -79,10 +83,8 @@ data:
                 "title": "Target Revision",
                 "value": "{{.app.spec.source.targetRevision}}",
                 "short": true
-              }
+              },{
               {{if .app.status.sync.revision}}
-              ,
-              {
                 "title": "Commit",
                 "value": "{{.app.spec.source.repoURL}}/{{.app.status.sync.revision}}",
                 "short": true
@@ -91,19 +93,15 @@ data:
                 "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Author}}",
                 "short": true
               },{
-                "title": "Message",
+                "title": "Commit Message",
                 "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}",
                 "short": true
-              }
+              },{
               {{end}}
-              {{if .app.status.operationState.message}}
-              ,
-              {
-                "title": "Error Message",
+                "title": "Operation Message",
                 "value": "{{.app.status.operationState.message}}",
                 "short": true
               }
-              {{end}}
               {{range $index, $c := .app.status.conditions}}
               {{if not $index}},{{end}}
               {{if $index}},{{end}}
@@ -139,10 +137,8 @@ data:
                 "title": "Target Revision",
                 "value": "{{.app.spec.source.targetRevision}}",
                 "short": true
-              }
+              },{
               {{if .app.status.sync.revision}}
-              ,
-              {
                 "title": "Commit",
                 "value": "{{.app.spec.source.repoURL}}/{{.app.status.sync.revision}}",
                 "short": true
@@ -151,19 +147,15 @@ data:
                 "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Author}}",
                 "short": true
               },{
-                "title": "Message",
+                "title": "Commit Message",
                 "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}",
                 "short": true
-              }
+              },{
               {{end}}
-              {{if .app.status.operationState.message}}
-              ,
-              {
-                "title": "Error Message",
+                "title": "Operation Message",
                 "value": "{{.app.status.operationState.message}}",
                 "short": true
               }
-              {{end}}
               {{range $index, $c := .app.status.conditions}}
               {{if not $index}},{{end}}
               {{if $index}},{{end}}
