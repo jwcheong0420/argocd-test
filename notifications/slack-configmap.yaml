@@ -12,6 +12,7 @@ data:
       triggers:
       - on-sync-succeeded
       - on-sync-status-unknown
+      - on-sync-failed
   service.webhook.slack-webhook: |
     url: $slack-webhook-url
     headers:
@@ -29,10 +30,6 @@ data:
               "title_link": "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
               "color": "#18be52",
               "fields": [{
-                "title": "Sync Status",
-                "value": "{{.app.status.sync.status}}",
-                "short": true
-              },{
                 "title": "Repository",
                 "value": "{{.app.spec.source.repoURL}}",
                 "short": true
@@ -56,10 +53,6 @@ data:
                 "title": "Message",
                 "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}",
                 "short": true
-              },{
-                "title": "Took",
-                "value": "{{((call .time.Parse .app.status.operationState.finishedAt).Sub (call .time.Parse .app.status.operationState.startedAt)).Minutes}} min {{((call .time.Parse .app.status.operationState.finishedAt).Sub (call .time.Parse .app.status.operationState.startedAt)).Seconds}} sec",
-                "short": true
               }]
             }]
           }
@@ -75,10 +68,6 @@ data:
               "title_link": "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
               "color": "#E96D76",
               "fields": [{
-                "title": "Sync Status",
-                "value": "{{.app.status.sync.status}}",
-                "short": true
-              },{
                 "title": "Repository",
                 "value": "{{.app.spec.source.repoURL}}",
                 "short": true
@@ -91,6 +80,30 @@ data:
                 "value": "{{.app.spec.source.targetRevision}}",
                 "short": true
               }
+              {{if .app.status.sync.revision}}
+              ,
+              {
+                "title": "Commit",
+                "value": "{{.app.spec.source.repoURL}}/{{.app.status.sync.revision}}",
+                "short": true
+              },{
+                "title": "Author",
+                "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Author}}",
+                "short": true
+              },{
+                "title": "Message",
+                "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}",
+                "short": true
+              }
+              {{end}}
+              {{if .app.status.operationState.message}}
+              ,
+              {
+                "title": "Error Message",
+                "value": "{{.app.status.operationState.message}}",
+                "short": true
+              }
+              {{end}}
               {{range $index, $c := .app.status.conditions}}
               {{if not $index}},{{end}}
               {{if $index}},{{end}}
@@ -115,10 +128,6 @@ data:
               "title_link": "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
               "color": "#E96D76",
               "fields": [{
-                "title": "Sync Status",
-                "value": "{{.app.status.sync.status}}",
-                "short": true
-              },{
                 "title": "Repository",
                 "value": "{{.app.spec.source.repoURL}}",
                 "short": true
@@ -131,6 +140,30 @@ data:
                 "value": "{{.app.spec.source.targetRevision}}",
                 "short": true
               }
+              {{if .app.status.sync.revision}}
+              ,
+              {
+                "title": "Commit",
+                "value": "{{.app.spec.source.repoURL}}/{{.app.status.sync.revision}}",
+                "short": true
+              },{
+                "title": "Author",
+                "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Author}}",
+                "short": true
+              },{
+                "title": "Message",
+                "value": "{{(call .repo.GetCommitMetadata .app.status.sync.revision).Message}}",
+                "short": true
+              }
+              {{end}}
+              {{if .app.status.operationState.message}}
+              ,
+              {
+                "title": "Error Message",
+                "value": "{{.app.status.operationState.message}}",
+                "short": true
+              }
+              {{end}}
               {{range $index, $c := .app.status.conditions}}
               {{if not $index}},{{end}}
               {{if $index}},{{end}}
