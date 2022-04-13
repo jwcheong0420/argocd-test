@@ -5,6 +5,12 @@ metadata:
 data:
   context: |
     argocdUrl: "https://localhost:8889"     # TODO : url 환경마다 다름
+  subscriptions: |
+    - recipients:
+      - webhook:slack-webhook
+      triggers:
+      - on-sync-succeeded
+      - on-sync-status-unknown
   service.webhook.slack-webhook: |
     url: $slack-webhook-url
     headers:
@@ -108,7 +114,3 @@ data:
       send:
       - app-sync-status-unknown
       when: app.status.sync.status == 'Unknown'
-  config.yaml: |
-    subscriptions:
-    - recipients:
-      - webhook:slack-webhook
