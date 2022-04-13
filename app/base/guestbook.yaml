@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: 'https://github.com/jwcheong0420/argocd-test'
     path: guestbook
-    targetRevision: main
+    targetRevision: master
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: joo
