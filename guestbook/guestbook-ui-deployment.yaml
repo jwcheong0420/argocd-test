@@ -18,9 +18,3 @@ spec:
         name: guestbook-ui
         ports:
         - containerPort: 80
-#         readinessProbe:
-#           initialDelaySeconds: 100
-#           timeoutSeconds: 1
-#           httpGet:
-#               path: /2222222
-#               port: 80
