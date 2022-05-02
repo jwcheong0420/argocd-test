@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: helm-guestbook
   namespace: argocd
+  labels:
+    test: 1111
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
@@ -10,8 +12,6 @@ spec:
     namespace: helm-guestbook
     server: {{ .Values.spec.destination.server }}
   project: default
-  labels:
-    test: 1111
   source:
     path: helm-guestbook
     repoURL: {{ .Values.spec.source.repoURL }}
