@@ -5,6 +5,7 @@ metadata:
   namespace: argocd
   labels:
     test: 1111
+    app: hello
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:

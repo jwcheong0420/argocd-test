@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: helm-hooks
   namespace: argocd
-  labels:
-    test: 2222
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
