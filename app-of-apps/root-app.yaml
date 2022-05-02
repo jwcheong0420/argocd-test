@@ -14,3 +14,5 @@ spec:
     path: app-of-apps/apps
     repoURL: https://github.com/jwcheong0420/argocd-test
     targetRevision: main
+  syncPolicy:
+    automated: { }
