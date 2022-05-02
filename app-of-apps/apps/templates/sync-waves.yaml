@@ -5,6 +5,8 @@ metadata:
   namespace: argocd
   labels:
     app: hi
+  annotations:
+    app: hi
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
