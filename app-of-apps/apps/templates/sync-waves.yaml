@@ -3,17 +3,13 @@ kind: Application
 metadata:
   name: sync-waves
   namespace: argocd
-  labels:
-    app: hi
-  annotations:
-    app: hi
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: sync-waves
     server: {{ .Values.spec.destination.server }}
-  project: default
+  project: app
   source:
     path: sync-waves
     repoURL: {{ .Values.spec.source.repoURL }}

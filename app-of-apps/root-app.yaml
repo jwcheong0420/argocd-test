@@ -3,17 +3,13 @@ kind: Application
 metadata:
   name: root-app
   namespace: argocd
-  labels:
-    app: hello
-  annotations:
-    app: hello
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: default
     name: in-cluster
-  project: default
+  project: app
   source:
     path: app-of-apps/apps
     repoURL: https://github.com/jwcheong0420/argocd-test

@@ -3,17 +3,13 @@ kind: Application
 metadata:
   name: kustomize-guestbook
   namespace: argocd
-  labels:
-    app: hello
-  annotations:
-    app: hello
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
     namespace: kustomize-guestbook
     server: {{ .Values.spec.destination.server }}
-  project: default
+  project: app
   source:
     path: kustomize-guestbook
     repoURL: {{ .Values.spec.source.repoURL }}
