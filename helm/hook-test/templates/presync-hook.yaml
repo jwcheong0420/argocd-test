@@ -1,7 +1,6 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: joo
   name: {{ .Chart.Name }}-{{ .Values.serviceName }}-pre-sync-1
   annotations:
     "helm.sh/hook": pre-install, pre-upgrade
@@ -22,7 +21,6 @@ spec:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: joo
   name: {{ .Chart.Name }}-{{ .Values.serviceName }}-pre-sync-2
   annotations:
     "helm.sh/hook": pre-install, pre-upgrade
