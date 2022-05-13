@@ -3,8 +3,6 @@ kind: Application
 metadata:
   name: hook-test
   namespace: argocd
-  labels:
-    test: joo
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
