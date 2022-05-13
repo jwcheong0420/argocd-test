@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook
+  name: hook-test
   namespace: argocd
   labels:
     test: joo
@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/jwcheong0420/argocd-test'
-    path: guestbook
+    path: helm/hook-test
     targetRevision: main
   destination:
     server: 'https://kubernetes.default.svc'

@@ -4,4 +4,4 @@ metadata:
   name: arbitrary
 
 resources:
-  - guestbook.yaml
+  - hook-test.yaml
